@@ -2,6 +2,8 @@ use leptos::task::spawn_local;
 use leptos::{ev::SubmitEvent, prelude::*};
 use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
+use leptos::*;
+
 
 #[wasm_bindgen]
 extern "C" {
@@ -16,52 +18,38 @@ struct GreetArgs<'a> {
 
 #[component]
 pub fn App() -> impl IntoView {
-    let (name, set_name) = signal(String::new());
-    let (greet_msg, set_greet_msg) = signal(String::new());
 
-    let update_name = move |ev| {
-        let v = event_target_value(&ev);
-        set_name.set(v);
-    };
-
-    let greet = move |ev: SubmitEvent| {
-        ev.prevent_default();
-        spawn_local(async move {
-            let name = name.get_untracked();
-            if name.is_empty() {
-                return;
-            }
-
-            let args = serde_wasm_bindgen::to_value(&GreetArgs { name: &name }).unwrap();
-            // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-            let new_msg = invoke("greet", args).await.as_string().unwrap();
-            set_greet_msg.set(new_msg);
-        });
-    };
+    let items = (0..15).collect::<Vec<usize>>();
 
     view! {
         <main class="container">
-            <h1>"Welcome to Tauri + Leptos"</h1>
+            <h1>"Djxs4nHypr"</h1>
 
-            <div class="row">
-                <a href="https://tauri.app" target="_blank">
-                    <img src="public/tauri.svg" class="logo tauri" alt="Tauri logo"/>
-                </a>
-                <a href="https://docs.rs/leptos/" target="_blank">
-                    <img src="public/leptos.svg" class="logo leptos" alt="Leptos logo"/>
-                </a>
-            </div>
-            <p>"Click on the Tauri and Leptos logos to learn more."</p>
+            <nav class="filter-bar">
+                <button class="filter-btn active">"ALL"</button>
+                <button class="filter-btn">"PIC"</button>
+                <button class="filter-btn">"VID"</button>
+            </nav>
 
-            <form class="row" on:submit=greet>
-                <input
-                    id="greet-input"
-                    placeholder="Enter a name..."
-                    on:input=update_name
-                />
-                <button type="submit">"Greet"</button>
-            </form>
-            <p>{ move || greet_msg.get() }</p>
+            <section class="horizontal-scroll-container">
+                <div class="honeycomb-track">
+                    < For 
+                        each=move || items.clone()
+                        key=|item| * item
+                        children= move |_| {
+                            view! {
+                                <div class="hexago-wrapper">
+                                    <div class="hexagon-inner">
+                                        <div class="hexagon-content">
+                                            <span class="placeholder-icon">PH</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    />
+                </div>
+            </section>
         </main>
     }
 }

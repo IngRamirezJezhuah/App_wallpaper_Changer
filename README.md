@@ -27,6 +27,13 @@ Your system is missing dependencies (or they do not exist in $PATH):
 ╰───────────────┴───────────────────────────────────────────────────────────────────╯
 ```
 
+> Nota el framework es tauri con leptos
+
+para ejecutar el widget copiar el siguiente comando
+```bash
+cargo tauri dev
+```
+
 Make sure you have installed the prerequisites for your OS: https://tauri.app/start/prerequisites/, then run:
   cd HyprDjxs4n
   cargo tauri android init

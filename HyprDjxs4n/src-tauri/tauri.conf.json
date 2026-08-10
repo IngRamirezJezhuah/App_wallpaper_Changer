@@ -15,7 +15,12 @@
       {
         "title": "hyprdjxs4n",
         "width": 800,
-        "height": 600
+        "height": 600,
+        "resizable":true,
+        "fullscreen":false,
+        "transparent":true,
+        "decorations": false
+
       }
     ],
     "security": {
