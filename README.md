@@ -1,7 +1,8 @@
 # App_wallpaper_Changer
+```bash
 
 ┌─[djxs4n@DjOs] - [~/Documentos/Programacion/hypaprDjxs4n/App_wallpaper_Changer] - [667]
-└─[$] sh <(curl https://create.tauri.app/sh)                                                                                                                                                                             [18:59:46]
+└─[$] sh <(curl https://create.tauri.app/sh)                                                                                                           
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100 16121  100 16121    0     0  59312      0 --:--:-- --:--:-- --:--:-- 59268
@@ -15,7 +16,7 @@ info: downloading create-tauri-app
 Template created!
 
 Your system is missing dependencies (or they do not exist in $PATH):
-```
+
 ╭───────────────┬───────────────────────────────────────────────────────────────────╮
 │ Rust          │ Visit https://www.rust-lang.org/learn/get-started#installing-rust │
 ├───────────────┼───────────────────────────────────────────────────────────────────┤

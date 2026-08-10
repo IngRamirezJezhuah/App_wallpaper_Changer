@@ -58,9 +58,10 @@ body {
     width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
-    padding: 2rem 10rem;
+    padding: 2rem calc(var(--hex-width) * 1.5) calc(var(--hex-width) * 0.75);
     box-sizing: border-box;
     scrollbar-width: none;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
 .horizontal-scroll-container::-webkit-scrollbar {
@@ -70,43 +71,67 @@ body {
 .honeycom-track {
     display: flex;
     flex-direction: row;
-    gap:var(--gap);
+    flex-wrap: nowrap;
+    /*gap:var(--gap);*/
     width: max-content;
+    height: max-content;
     align-items: center;
 }
 
 .hexagon-wrapper {
-    width: var(--hex-width);
-    height: var(--hex-height);
     position: relative;
-    transition: trasnform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+    width: var(--hex-width);
+    aspect-ratio: 1 / 1.1547;
+    margin-right: calc(var(--hex-width)* 0.25)* -1;
+    margin-bottom: calc(var(--hex-width)* 0.25)* -1;
     cursor: pointer;
+    z-index: 1;
+    transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), z-index 0.2s;
 }
 
 .hexagon-wrapper:hover{
-    transform: translateY(-10px) scale(1.08);
-    z-index: 10;
+    transform: translateY(-20px) scale(1.15) !important;
+    z-index: 50;
 }
 
-.hexagon-inner {
+.hexagon-inner{
     width: 100%;
     height: 100%;
-    background: rgba(62, 88, 165, 0.75);
-    backdrop-filter: blur(8px);
     clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(20, 20, 25, 0.75);
+    backdrop-filter: var(--bg-blur);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.2;
+    overflow: hidden;
+    transition: background 0.2s, border 0.2s;
 }
 
 .hexagon-wrapper:hover .hexagon-inner {
     background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
+/* Estilo para las imágenes dentro del hexágono */
+.hexagon-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* La imagen se ajusta y recorta */
+}
+
+/* --- Marcadores de tipo (PIC/VID) --- */
 .hexagon-content {
-    color: rgba(16, 11, 11, 0.4);
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(4px);
+    padding: 3px 6px;
+    border-radius: 4px;
+    color: #bbb;
     font-weight: bold;
-    font-size: 0.9rem;
+    font-size: 0.6rem;
+    pointer-events: none;
+    z-index: 10;
 }
