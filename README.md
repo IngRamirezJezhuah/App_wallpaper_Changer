@@ -30,7 +30,7 @@ Your system is missing dependencies (or they do not exist in $PATH):
 
 > Nota el framework es tauri con leptos
 
-para ejecutar el widget copiar el siguiente comando
+para ejecutar el widget copiar el siguiente comandoca
 ```bash
 cargo tauri dev
 ```
@@ -72,3 +72,4 @@ HyprDjxs4n/
 │   │   │   └── engine.rs   <-- Ejecuta los procesos de sww y mpvpaper
 │   │   └── main.rs         <-- Inicialización de Tauri y registro de comandos
 ```
+
