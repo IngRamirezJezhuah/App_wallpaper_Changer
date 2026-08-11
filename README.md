@@ -1,6 +1,44 @@
 # App_wallpaper_Changer
-```bash
+> Preview de la app
 
+![alt text](/App_wallpaper_Changer/HyprDjxs4n/public/image.png)
+
+> Nota el framework es tauri con leptos
+
+para ejecutar el widget copiar el siguiente comandoca
+```bash
+cargo tauri dev
+```
+
+# Arquitectura
+
+```plaintext
+HyprDjxs4n/
+│
+├── index.html <-- El contenedor base donde Leptos inyectará la UI.
+├── Trunk.toml           
+│
+├── src/                 
+│   ├── components/        
+│   │   ├── gallery.rs      
+│   │   ├── preview.rs      
+│   │   └── settings.rs     
+│   ├── app.rs              
+│   └── main.rs             
+│
+├── src-tauri/              
+│   ├── tauri.conf.json     
+│   ├── src/
+│   │   ├── commands/       
+│   │   │   ├── mod.rs
+│   │   │   └── apply.rs    
+│   │   ├── core/           
+│   │   │   ├── scanner.rs  
+│   │   │   └── engine.rs   
+│   │   └── main.rs         
+```
+
+```bash
 ┌─[djxs4n@DjOs] - [~/Documentos/Programacion/hypaprDjxs4n/App_wallpaper_Changer] - [667]
 └─[$] sh <(curl https://create.tauri.app/sh)                                                                                                           
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -28,12 +66,6 @@ Your system is missing dependencies (or they do not exist in $PATH):
 ╰───────────────┴───────────────────────────────────────────────────────────────────╯
 ```
 
-> Nota el framework es tauri con leptos
-
-para ejecutar el widget copiar el siguiente comandoca
-```bash
-cargo tauri dev
-```
 
 Make sure you have installed the prerequisites for your OS: https://tauri.app/start/prerequisites/, then run:
   cd HyprDjxs4n
@@ -45,31 +77,5 @@ For Desktop development, run:
 For Android development, run:
   cargo tauri android dev
 
-# Arquitectura
 
-```plaintext
-HyprDjxs4n/
-│
-├── index.html <-- El contenedor base donde Leptos inyectará la UI.
-├── Trunk.toml              <-- Configuración de empaquetado del frontend.
-│
-├── src/                    <-- FRONTEND (UI con Leptos)
-│   ├── components/         <-- NUEVA CARPETA: Aquí irá la UI modular
-│   │   ├── gallery.rs      <-- La cuadrícula/hexágonos de los wallpapers
-│   │   ├── preview.rs      <-- Reproductor de video/imagen seleccionada
-│   │   └── settings.rs     <-- Menú flotante de configuración
-│   ├── app.rs              <-- Enrutamiento y estado global de la UI
-│   └── main.rs             <-- Punto de entrada de WebAssembly
-│
-├── src-tauri/              <-- ⚙️ BACKEND (Lógica del Sistema Operativo)
-│   ├── tauri.conf.json     <-- Permisos, tamaño de ventana y comandos IPC.
-│   ├── src/
-│   │   ├── commands/       <-- NUEVA CARPETA: Funciones llamadas desde la UI
-│   │   │   ├── mod.rs
-│   │   │   └── apply.rs    <-- Funciones #[tauri::command] para aplicar fondos
-│   │   ├── core/           <-- NUEVA CARPETA: Lógica pura del sistema
-│   │   │   ├── scanner.rs  <-- Lee el disco buscando imágenes/videos
-│   │   │   └── engine.rs   <-- Ejecuta los procesos de sww y mpvpaper
-│   │   └── main.rs         <-- Inicialización de Tauri y registro de comandos
-```
 

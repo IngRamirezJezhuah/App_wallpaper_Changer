@@ -66,6 +66,10 @@ pub fn App() -> impl IntoView {
                                     }
                                 >
                                     <div class="hexagon-inner">
+                                        // Aquí pondrías la imagen real en el futuro:
+                                        // <img src={convert_path(w_path)} class="hexagon-image" />
+                                        
+                                        // Marcador visual (PH = Placeholder)
                                         <div class="hexagon-content">
                                             <span class="placeholder-icon">
                                                 {if index % 3 == 0 { "VID" } else { "PIC" }}
