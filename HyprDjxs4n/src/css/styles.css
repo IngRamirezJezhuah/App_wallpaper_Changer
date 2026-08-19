@@ -25,6 +25,12 @@ body {
 }
 
 /* ______________ Barra de Filtros ______________ */
+.img{
+    justify-items: center;
+    width: 30vw;
+    height: 30vh;
+}
+
 .filter-bar{
     align-self: center;
     margin-bottom: 1.5rem;

@@ -1,9 +1,10 @@
+use leptos::attr::r#async;
 use leptos::task::spawn_local;
 use leptos::{ev::SubmitEvent, prelude::*};
 use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
 use leptos::*;
-use leptos::prelude::*;
+//use leptos::prelude::*;
 
 
 #[wasm_bindgen]
@@ -31,9 +32,8 @@ pub fn App() -> impl IntoView {
     let filters = vec![ "ALL", "PIC", "VID"];
     // la chinagdera de cuantos cuadros hay
     let items = (0..30).collect::<Vec<usize>>();
-
-    // let wallpapers = create_resource(move || (), |_| async { get_wallpapers().await });
-
+    //let wallpapers = create_resource(move || (), |_| async { get_wallpapers().await });
+    //let wallpapers = create_slice(/* signal */, move |_| (), |_| async { get_wallpapers().await });
     view! {
         <main class="app-container">
             // Barra de Filtros
@@ -45,6 +45,34 @@ pub fn App() -> impl IntoView {
 
             <section class="horizontal-scroll-container">
                 <div class="honeycomb-grid">
+                /*
+                <For
+                        each=move || wallpapers.read()
+                        key=|wallpaper| wallpaper.path.clone()
+                        children=move |wallpaper| {
+                            view! {
+                                <div 
+                                    class="hexagon-wrapper"
+                                    on:click=move |_| {
+                                        let w_clone = wallpaper.clone();
+                                        spawn_local(async move {
+                                            apply_wallpaper(w_clone).await;
+                                        });
+                                    }
+                                >
+                                    <div class="hexagon-inner">
+                                        <img src={wallpaper.path} class="hexagon-image" />
+                                        <div class="hexagon-content">
+                                            <span class="placeholder-icon">
+                                                {if wallpaper.type_ext == "mp4" { "VID" } else { "PIC" }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    />
+                */
                     <For 
                         each=move || items.clone()
                         key=|item| *item
@@ -70,6 +98,7 @@ pub fn App() -> impl IntoView {
                                         // <img src={convert_path(w_path)} class="hexagon-image" />
                                         
                                         // Marcador visual (PH = Placeholder)
+                                        <img src="./public/wallpapers/147074309_p0_master1200.png" alt="Img" class="img"/>
                                         <div class="hexagon-content">
                                             <span class="placeholder-icon">
                                                 {if index % 3 == 0 { "VID" } else { "PIC" }}
@@ -80,7 +109,9 @@ pub fn App() -> impl IntoView {
                             }
                         }
                     />
+                
                 </div>
+                
             </section>
         </main>
     }
