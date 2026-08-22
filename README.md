@@ -10,33 +10,6 @@ para ejecutar el widget copiar el siguiente comandoca
 cargo tauri dev
 ```
 
-# Arquitectura
-
-```plaintext
-HyprDjxs4n/
-│
-├── index.html <-- El contenedor base donde Leptos inyectará la UI.
-├── Trunk.toml           
-│
-├── src/                 
-│   ├── components/        
-│   │   ├── gallery.rs      
-│   │   ├── preview.rs      
-│   │   └── settings.rs     
-│   ├── app.rs              
-│   └── main.rs             
-│
-├── src-tauri/              
-│   ├── tauri.conf.json     
-│   ├── src/
-│   │   ├── commands/       
-│   │   │   ├── mod.rs
-│   │   │   └── apply.rs    
-│   │   ├── core/           
-│   │   │   ├── scanner.rs  
-│   │   │   └── engine.rs   
-│   │   └── main.rs         
-```
 
 ```bash
 ┌─[djxs4n@DjOs] - [~/Documentos/Programacion/hypaprDjxs4n/App_wallpaper_Changer] - [667]

@@ -155,6 +155,15 @@ body {
     transform: translateY(-10px) scale(1.15) !important;
 }
 
+/* Estado placeholder inactivo */
+.hexagon-wrapper.placeholder {
+    cursor: default;
+    filter: grayscale(100%) opacity(0.3);
+}
+
+.hexagon-wrapper.placeholder:hover {
+    transform: none !important;
+}
 
 .hexagon-inner{
     width: 100%;
@@ -180,7 +189,8 @@ body {
 .hexagon-image {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* La imagen se ajusta y recorta */
+    object-fit: cover; 
+    pointer-events: none;
 }
 
 /* --- Marcadores de tipo (PIC/VID) --- */
