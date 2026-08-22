@@ -1,6 +1,8 @@
 use serde::{Deserialize, Serialize};
 use std::fs;
 use std::path::{Path, PathBuf};
+//1use js-sys::window;
+
 
 #[derive(Clone, Serialize, Deserialize, PartialEq, Debug)]
 pub struct Wallpaper {
@@ -88,7 +90,8 @@ fn get_wallpapers(filter: String) -> Vec<Wallpaper> {
     wallpapers
 }
 
-pub async fn _apply_wallpaper(wallpaper: Wallpaper) {
+#[tauri::command]
+async fn apply_wallpaper(wallpaper: Wallpaper) {
     if wallpaper.is_placeholder {
         return;
     }
@@ -100,7 +103,7 @@ pub async fn _apply_wallpaper(wallpaper: Wallpaper) {
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())
-        .invoke_handler(tauri::generate_handler![get_wallpapers])
+        .invoke_handler(tauri::generate_handler![get_wallpapers, apply_wallpaper])
         .run(tauri::generate_context!())
         .expect("Error ejecutando la aplicación de Tauri");
 }

@@ -24,7 +24,8 @@
       }
     ],
     "security": {
-      "csp": null
+      "csp": "default-src 'self'; img-src 'self' asset: data:",
+      "assetProtocol": {"enable": true, "scope": ["$HOME/**"] }
     }
   },
   "bundle": {
