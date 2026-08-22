@@ -17,7 +17,9 @@ fn get_wallpaper_dir() -> PathBuf {
     if !path.exists() {
         let _ = fs::create_dir_all(&path);
     }*/// Detecta ~/Pictures o ~/Imágenes automáticamente según el idioma del sistema
-    let mut path = dirs::picture_dir().unwrap_or_else(|| {
+    let mut dir = dirs::picture_dir();
+    println!("Picture dir {:?}", dir);
+    let mut path = dir.unwrap_or_else(|| {
         dirs::home_dir().unwrap_or_else(|| PathBuf::from(".")).join("Pictures")
     });
     
@@ -66,8 +68,9 @@ fn scan_dir(dir: &Path, filter: &str) -> Vec<Wallpaper> {
     list
 }
 
-pub fn get_wallpapers(filter: String) -> Vec<Wallpaper> {
-    let dir = get_wallpaper_dir();
+#[tauri::command]
+fn get_wallpapers(filter: String) -> Vec<Wallpaper> {
+    let dir: PathBuf = get_wallpaper_dir();
     let mut wallpapers = scan_dir(&dir, &filter);
 
     let count = wallpapers.len();
@@ -97,7 +100,7 @@ pub async fn _apply_wallpaper(wallpaper: Wallpaper) {
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())
-        .invoke_handler(tauri::generate_handler![])
+        .invoke_handler(tauri::generate_handler![get_wallpapers])
         .run(tauri::generate_context!())
         .expect("Error ejecutando la aplicación de Tauri");
 }

@@ -28,6 +28,7 @@ struct GetArgs {
 async fn fetch_wallpapers( filter_val: String) -> Vec<Wallpaper> {
     let args = serde_wasm_bindgen::to_value(&GetArgs { filter: filter_val }).unwrap();
     let res = invoke("get_wallpapers", args).await;
+    println!("response {:?}",res);
     serde_wasm_bindgen::from_value(res).unwrap_or_default()
 }
 
