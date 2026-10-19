@@ -26,6 +26,8 @@ Objetivo: estructura que soporte todo lo demás.
 - Comando extra get_status: qué backend está activo, wallpaper actual, PID mpv.
 Verificación: cargo check + probar en tauri dev que una imagen cambia el fondo.
 
+- [x] actividad echa
+
 ---
 
 ## Fase 1 — mpvpaper (prioridad principal)
@@ -51,8 +53,6 @@ engine/mod.rs     → facade: apply(path) según tipo + config
 engine/swww.rs    → daemon ensure/kill + img con transiciones
 engine/mpv.rs     → spawn/kill mpvpaper + resolución de monitores
 ```
-
-- [ ] actividad por hacer
 - [x] actividad echa
 
 ---
