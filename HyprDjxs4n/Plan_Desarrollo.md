@@ -9,6 +9,8 @@ Bases y dependencias necesarias:
 - hypaper
 - mpvpaper
 
+---
+
 El backend actual solo escanea la referencia doned se guarda los wallpapers y apply wallpaper es un stub lo que significa que guarda temporalmente los archivos.
 
 > [!CAUTION] Es necesario separar el swww daemon si se va a ejecutar los wallpaper dinamio de mvpaper
@@ -53,7 +55,7 @@ engine/mod.rs     → facade: apply(path) según tipo + config
 engine/swww.rs    → daemon ensure/kill + img con transiciones
 engine/mpv.rs     → spawn/kill mpvpaper + resolución de monitores
 ```
-- [x] actividad echa
+- [x] actividad terminada
 
 ---
 
@@ -86,7 +88,7 @@ gif → lo maneja swww (soporta GIF animado), solo mp4/etc van a mpvpaper.
 Nota honesta: la transición de swww solo aplica imagen→imagen; al cruzar a video no hay crossfade (mpvpaper no lo ofrece) — entrada directa en layer background.
 
 - [ ] actividad por hacer
-- [x] actividad echa
+
 
 ---
 ## Fase 3 — Selector UI completo estilo skwd
@@ -100,7 +102,7 @@ config.json: modo, salida mpv, carpeta de fondos, y bloque transition:
 type (none/simple/fade/left/wipe/wave/grow/center/random), duration, fps, step, angle, pos, bezier, wave, resize (crop/fit/stretch), filter. Se inyectan como flags de swww img solo cuando difieren de defaults.
 
 - [ ] actividad por hacer
-- [x] actividad echa
+
 
 ---
 
@@ -113,7 +115,7 @@ get_state → motor activo, wallpaper actual, config (para marcar tarjeta activa
 get_config / save_config (transiciones) — UI de ajustes queda para Fase 4.
 
 - [ ] actividad por hacer
-- [x] actividad echa
+
 
 ---
 ## 5. Frontend (mínimo en esta fase)

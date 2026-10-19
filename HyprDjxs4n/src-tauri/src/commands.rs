@@ -1,7 +1,11 @@
 use serde::Serialize;
-use crate::{Wallpaper, scanner::get_wallpaper_dir};
+use crate::scanner::{Wallpaper, get_wallpaper_dir, scan_dir};
 use std::{fmt::format, path::{self, PathBuf}};
-
+/*
+Notas de mantenimiento para mi yo del futuro
+Este archivo es el que se encarga de seleccionar el wallpaper
+y el de aplicarlo es lo que lo escoje valgame
+*/
 #[derive(Serialize)]
 pub struct ApplyResult {
     pub success: bool,

@@ -1,9 +1,14 @@
-use std::fs::{self, exists};
 use std::path::{Path, PathBuf};
 use serde::{Deserialize, Serialize};
+use std::fs;
+/*
+Notas de mantenimiento para mi yo del futuro
+Este archivo es el que escanea la carpeta de wallpapers
+aqui la busca y la escanea
+*/
 
 #[derive(Clone, Serialize, Deserialize, PartialEq, Debug)]
-struct Wallpaper {
+pub struct Wallpaper {
     pub path: String,
     pub name: String,
     pub type_ext: String,
@@ -15,7 +20,7 @@ struct Wallpaper {
 pub fn get_wallpaper_dir() -> PathBuf{
     let dir = dirs::picture_dir();
     let mut path = dir.unwrap_or_else(|| {
-        dirs::home_dir.unwrap_or_else(|| PathBuf::from(".")).join("Pictures")
+        dirs::home_dir().unwrap_or_else(|| PathBuf::from(".")).join("Pictures")
     });
     path.push("wallpapers");
 
