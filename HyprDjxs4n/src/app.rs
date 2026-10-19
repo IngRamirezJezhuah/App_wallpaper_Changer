@@ -40,12 +40,6 @@ async fn apply_wallpaper(w: Wallpaper) {
     invoke("apply_wallpaper", args).await;
 }
 
-#[wasm_bindgen]
-extern "C" {
-    #[wasm_bindgen(js_namespace = ["window", "__TAURI__", "core"], js_name = convertFileSrc)]
-    fn convert_file_src(path: &str) -> String;
-}
-
 #[component]
 pub fn App() -> impl IntoView {
     
@@ -71,7 +65,7 @@ pub fn App() -> impl IntoView {
                             on:click=move |_| set_filter.set(f_click.clone())
                             >
                         {f}
-                        </button> 
+                        </button>
                     }
                 }).collect_view()}
             </nav>
@@ -145,7 +139,7 @@ pub fn App() -> impl IntoView {
                                         <div class="hexagon-inner">
                                             {if !is_ph {
                                                 view! {
-                                                    <img src={convert_file_src(&img_src)} alt={wallpaper.name.clone()} class="hexagon-image" />
+                                                    <img src={img_src} alt={wallpaper.name.clone()} class="hexagon-image" />
                                                     <div class="hexagon-content">
                                                         <span class="placeholder-icon">{tag_label}</span>
                                                     </div>
