@@ -14,12 +14,20 @@
     "windows": [
       {
         "title": "hypaperdjxs4n",
-        "width": 800,
-        "height": 600
+        "width": 960,
+        "height": 420,
+        "resizable": true,
+        "fullscreen": false,
+        "transparent": true,
+        "decorations": false
       }
     ],
     "security": {
-      "csp": null
+      "csp": "default-src 'self'; img-src 'self' asset: https://asset.localhost data:",
+      "assetProtocol": {
+        "enable": true,
+        "scope": ["$HOME/**"]
+      }
     }
   },
   "bundle": {

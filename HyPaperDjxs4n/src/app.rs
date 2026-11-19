@@ -1,67 +1,50 @@
+use crate::api::{apply_wallpaper, fetch_wallpapers};
+use crate::components::filter_bar::FilterBar;
+use crate::components::hex_grid::HexGrid;
+use crate::models::{FilterKind, WallpaperItem};
+use leptos::prelude::*;
 use leptos::task::spawn_local;
-use leptos::{ev::SubmitEvent, prelude::*};
-use serde::{Deserialize, Serialize};
-use wasm_bindgen::prelude::*;
-
-#[wasm_bindgen]
-extern "C" {
-    #[wasm_bindgen(js_namespace = ["window", "__TAURI__", "core"])]
-    async fn invoke(cmd: &str, args: JsValue) -> JsValue;
-}
-
-#[derive(Serialize, Deserialize)]
-struct GreetArgs<'a> {
-    name: &'a str,
-}
 
 #[component]
 pub fn App() -> impl IntoView {
-    let (name, set_name) = signal(String::new());
-    let (greet_msg, set_greet_msg) = signal(String::new());
+    let (filter, set_filter) = signal(FilterKind::All);
+    let (selected_path, set_selected_path) = signal::<Option<String>>(None);
+    let (status_msg, set_status_msg) = signal::<Option<String>>(None);
 
-    let update_name = move |ev| {
-        let v = event_target_value(&ev);
-        set_name.set(v);
-    };
+    let wallpapers = LocalResource::new(move || {
+        let current = filter.get();
+        async move { fetch_wallpapers(current).await }
+    });
 
-    let greet = move |ev: SubmitEvent| {
-        ev.prevent_default();
+    let on_pick = Callback::new(move |item: WallpaperItem| {
+        set_selected_path.set(Some(item.path.clone()));
         spawn_local(async move {
-            let name = name.get_untracked();
-            if name.is_empty() {
-                return;
+            if let Some(res) = apply_wallpaper(item).await {
+                set_status_msg.set(Some(res.message));
             }
-
-            let args = serde_wasm_bindgen::to_value(&GreetArgs { name: &name }).unwrap();
-            // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-            let new_msg = invoke("greet", args).await.as_string().unwrap();
-            set_greet_msg.set(new_msg);
         });
-    };
+    });
 
     view! {
-        <main class="container">
-            <h1>"Welcome to Tauri + Leptos"</h1>
+        <main class="app-container">
+            <FilterBar current=filter on_select=set_filter />
 
-            <div class="row">
-                <a href="https://tauri.app" target="_blank">
-                    <img src="public/tauri.svg" class="logo tauri" alt="Tauri logo"/>
-                </a>
-                <a href="https://docs.rs/leptos/" target="_blank">
-                    <img src="public/leptos.svg" class="logo leptos" alt="Leptos logo"/>
-                </a>
-            </div>
-            <p>"Click on the Tauri and Leptos logos to learn more."</p>
+            {move || status_msg.get().map(|msg| view! {
+                <div class="status-pill">{msg}</div>
+            })}
 
-            <form class="row" on:submit=greet>
-                <input
-                    id="greet-input"
-                    placeholder="Enter a name..."
-                    on:input=update_name
-                />
-                <button type="submit">"Greet"</button>
-            </form>
-            <p>{ move || greet_msg.get() }</p>
+            <Suspense fallback=move || view! { <div class="empty-state">"Escaneando wallpapers..."</div> }>
+                {move || {
+                    let list = wallpapers.get().unwrap_or_default();
+                    view! {
+                        <HexGrid
+                            items=list
+                            selected_path=selected_path
+                            on_pick=on_pick
+                        />
+                    }
+                }}
+            </Suspense>
         </main>
     }
 }
