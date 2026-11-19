@@ -62,8 +62,6 @@ pub fn App() -> impl IntoView {
                 <button type="submit">"Greet"</button>
             </form>
             <p>{ move || greet_msg.get() }</p>
-
-            <p>Hola si funciona el hot reload</p>
         </main>
     }
 }

@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "hyprdjxs4n",
+  "productName": "hypaperdjxs4n",
   "version": "0.1.0",
-  "identifier": "com.djxs4n.hyprdjxs4n",
+  "identifier": "com.djxs4n.hypaperdjxs4n",
   "build": {
     "beforeDevCommand": "trunk serve",
     "devUrl": "http://localhost:1420",
@@ -13,19 +13,13 @@
     "withGlobalTauri": true,
     "windows": [
       {
-        "title": "hyprdjxs4n",
+        "title": "hypaperdjxs4n",
         "width": 800,
-        "height": 600,
-        "resizable":true,
-        "fullscreen":false,
-        "transparent":true,
-        "decorations": false
-
+        "height": 600
       }
     ],
     "security": {
-      "csp": "default-src 'self'; img-src 'self' asset: data:",
-      "assetProtocol": {"enable": true, "scope": ["$HOME/**"] }
+      "csp": null
     }
   },
   "bundle": {

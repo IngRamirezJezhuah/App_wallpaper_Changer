@@ -2,5 +2,5 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 fn main() {
-    hyprdjxs4n_lib::run()
+    hypaperdjxs4n_lib::run()
 }
